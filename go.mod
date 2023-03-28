@@ -1,4 +1,4 @@
-module github.com/miguelgz36/Mamuro-search-service
+module github.com/miguelgz36/MamuroSearchService
 
 go 1.15
 

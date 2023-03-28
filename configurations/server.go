@@ -11,5 +11,7 @@ func InitServer() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
+	//routes.InitRoutes()
+
 	http.ListenAndServe(":8080", r)
 }
