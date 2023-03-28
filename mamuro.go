@@ -1,0 +1,5 @@
+package mamurosearchservice
+
+func main() {
+
+}
