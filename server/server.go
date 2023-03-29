@@ -1,9 +1,9 @@
-package configurations
+package server
 
 import (
 	"net/http"
 
-	"github.com/miguelgz36/MamuroSearchService/configurations/routes"
+	"github.com/miguelgz36/MamuroSearchService/server/routes"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"

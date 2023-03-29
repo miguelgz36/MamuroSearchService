@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/miguelgz36/MamuroSearchService/configurations"
+	"github.com/miguelgz36/MamuroSearchService/server"
 )
 
 func main() {
-	configurations.InitServer()
+	server.InitServer()
 }
