@@ -7,5 +7,6 @@ import (
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
-	w.Write(services.Search())
+	textToSearch := r.URL.Query().Get("text")
+	w.Write(services.Search(textToSearch))
 }

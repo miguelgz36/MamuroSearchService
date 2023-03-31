@@ -10,11 +10,11 @@ import (
 	"github.com/miguelgz36/IndexerGolang/connection"
 )
 
-func Search() []byte {
+func Search(textToSearch string) []byte {
 
-	urlSearch := "http://localhost:4080/es/_search"
+	urlSearch := "http://192.168.20.6:4080/es/_search"
 
-	jsonBody := getJsonBodyQuery()
+	jsonBody := getJsonBodyQuery(textToSearch)
 
 	reqBody, err := json.Marshal(jsonBody)
 	if err != nil {
@@ -45,18 +45,13 @@ func Search() []byte {
 		panic(err)
 	}
 
-	jsonData, err := json.Marshal(body)
-	if err != nil {
-		panic(err)
-	}
-
 	fmt.Println("ZINC: " + string(body))
-	return jsonData
+	return body
 }
 
-func getJsonBodyQuery() map[string]interface{} {
+func getJsonBodyQuery(textToSearch string) map[string]interface{} {
 	query_string := map[string]interface{}{
-		"query": "evans",
+		"query": textToSearch,
 	}
 
 	must := []map[string]interface{}{
