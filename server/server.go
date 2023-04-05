@@ -15,5 +15,8 @@ func InitServer() {
 
 	routes.InitRoutes(r)
 
-	http.ListenAndServe(":8080", r)
+	error := http.ListenAndServe(":8081", r)
+	if error != nil {
+		panic(error)
+	}
 }
