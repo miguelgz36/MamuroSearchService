@@ -51,7 +51,7 @@ func Search(textToSearch string) []byte {
 
 func getJsonBodyQuery(textToSearch string) map[string]interface{} {
 	query_string := map[string]interface{}{
-		"query": textToSearch,
+		"query": "\"" + textToSearch + "\"",
 	}
 
 	must := []map[string]interface{}{
@@ -85,7 +85,7 @@ func getJsonBodyQuery(textToSearch string) map[string]interface{} {
 
 	result := map[string]interface{}{
 		"query": query,
-		"size":  100,
+		"size":  2,
 		"from":  0,
 		"sort":  sort,
 		"aggs":  aggs,
