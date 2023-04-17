@@ -10,7 +10,7 @@ import (
 	"github.com/miguelgz36/IndexerGolang/connection"
 )
 
-func Search(textToSearch string, page int) []byte {
+func Search(textToSearch string, page int) ([]byte, error) {
 
 	urlSearch := "http://172.31.29.222:4080/es/_search"
 
@@ -18,14 +18,14 @@ func Search(textToSearch string, page int) []byte {
 
 	reqBody, err := json.Marshal(jsonBody)
 	if err != nil {
-		fmt.Println("Error encoding params:", err)
+		return []byte("Error encoding params: " + err.Error()), err
 	}
 
 	fmt.Println("JSON:" + string(reqBody))
 
 	req, err := http.NewRequest("POST", urlSearch, bytes.NewBuffer(reqBody))
 	if err != nil {
-		fmt.Println(err.Error())
+		return []byte("Problem creating request: " + err.Error()), err
 	}
 
 	connection.SetHeaders(req)
@@ -35,18 +35,18 @@ func Search(textToSearch string, page int) []byte {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		panic(err)
+		return []byte("Problem doing post to zinc search: " + err.Error()), err
 	}
 
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		return []byte("Could not read body of zinc search service: " + err.Error()), err
 	}
 
-	fmt.Println("ZINC: " + string(body))
-	return body
+	fmt.Println("Result: " + string(body))
+	return body, nil
 }
 
 func getJsonBodyQuery(textToSearch string, page int) map[string]interface{} {
