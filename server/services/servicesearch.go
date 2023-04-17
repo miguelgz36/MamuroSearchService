@@ -12,7 +12,7 @@ import (
 
 func Search(textToSearch string, page int) []byte {
 
-	urlSearch := "http://localhost:4080/es/_search"
+	urlSearch := "http://172.31.29.222:4080/es/_search"
 
 	jsonBody := getJsonBodyQuery(textToSearch, page)
 
