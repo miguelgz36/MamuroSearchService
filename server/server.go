@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/miguelgz36/MamuroSearchService/server/routes"
@@ -11,6 +12,8 @@ import (
 )
 
 func InitServer() {
+	port := ":8080"
+
 	r := chi.NewRouter()
 
 	cors := cors.New(cors.Options{
@@ -27,8 +30,9 @@ func InitServer() {
 
 	routes.InitRoutes(r)
 
-	error := http.ListenAndServe(":8080", r)
+	error := http.ListenAndServe(port, r)
 	if error != nil {
 		panic(error)
 	}
+	fmt.Println("server is running at port: " + port)
 }
